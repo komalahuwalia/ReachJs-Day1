@@ -449,6 +449,138 @@ var MyDate = function (_React$Component) {
 exports.default = MyDate;
 });
 
+;require.register("components/TaskList.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TaskList = function (_React$Component) {
+    _inherits(TaskList, _React$Component);
+
+    function TaskList(props) {
+        _classCallCheck(this, TaskList);
+
+        return _possibleConstructorReturn(this, (TaskList.__proto__ || Object.getPrototypeOf(TaskList)).call(this, props));
+    }
+
+    _createClass(TaskList, [{
+        key: "renderList",
+        value: function renderList(tasks) {
+            return tasks.map(function (listItem) {
+                return _react2.default.createElement(
+                    "li",
+                    null,
+                    listItem
+                );
+            });
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                { id: "todoList" },
+                _react2.default.createElement(
+                    "ul",
+                    null,
+                    this.renderList(this.props.tasks)
+                )
+            );
+        }
+    }]);
+
+    return TaskList;
+}(_react2.default.Component);
+
+exports.default = TaskList;
+});
+
+;require.register("components/ToDoApp.js", function(exports, require, module) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _TaskList = require('components/TaskList');
+
+var _TaskList2 = _interopRequireDefault(_TaskList);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ToDoApp = function (_React$Component) {
+    _inherits(ToDoApp, _React$Component);
+
+    function ToDoApp(props) {
+        _classCallCheck(this, ToDoApp);
+
+        var _this = _possibleConstructorReturn(this, (ToDoApp.__proto__ || Object.getPrototypeOf(ToDoApp)).call(this, props));
+
+        _this.state = {
+            taskList: []
+        };
+        return _this;
+    }
+
+    _createClass(ToDoApp, [{
+        key: 'addItem',
+        value: function addItem(e) {
+            e.preventDefault();
+            this.setState({
+                taskList: this.state.taskList.concat(this.refs.taskname.value)
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'form',
+                    null,
+                    _react2.default.createElement('input', { ref: 'taskname', type: 'text', id: 'taskname' }),
+                    _react2.default.createElement('input', { type: 'submit', id: 'addTask', onClick: this.addItem.bind(this) })
+                ),
+                _react2.default.createElement(_TaskList2.default, { tasks: this.state.taskList })
+            );
+        }
+    }]);
+
+    return ToDoApp;
+}(_react2.default.Component);
+
+exports.default = ToDoApp;
+});
+
 ;require.register("components/Welcome.js", function(exports, require, module) {
 'use strict';
 
@@ -510,17 +642,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Welcome = require('components/Welcome');
+var _ToDoApp = require('components/ToDoApp');
 
-var _Welcome2 = _interopRequireDefault(_Welcome);
-
-var _HelloKitty = require('components/HelloKitty');
-
-var _HelloKitty2 = _interopRequireDefault(_HelloKitty);
-
-var _MyClock = require('components/MyClock');
-
-var _MyClock2 = _interopRequireDefault(_MyClock);
+var _ToDoApp2 = _interopRequireDefault(_ToDoApp);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -540,12 +664,6 @@ var App = function (_React$Component) {
     }
 
     _createClass(App, [{
-        key: 'getDateTime',
-        value: function getDateTime() {
-            var date = new Date();
-            return date.toISOString();
-        }
-    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -561,9 +679,7 @@ var App = function (_React$Component) {
                     null,
                     'This is a Simple One Page app'
                 ),
-                _react2.default.createElement(_Welcome2.default, { name: 'Komal' }),
-                _react2.default.createElement(_MyClock2.default, null),
-                _react2.default.createElement(_HelloKitty2.default, { imageUrl: 'http://wallpapercave.com/wp/WcKr5nB.jpg', name: 'Hello Kitty', message: 'Hey Kitty' })
+                _react2.default.createElement(_ToDoApp2.default, null)
             );
         }
     }]);
